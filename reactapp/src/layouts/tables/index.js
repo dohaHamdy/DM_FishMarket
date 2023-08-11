@@ -4,7 +4,7 @@
 =========================================================
 
 * Product Page: https://www.creative-tim.com/product/material-dashboard-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
+* (https://www.creative-tim.com)
 
 Coded by www.creative-tim.com
 
@@ -31,15 +31,29 @@ import DataTable from "../../examples/Tables/DataTable";
 import authorsTableData from "../../layouts/tables/data/authorsTableData";
 import projectsTableData from "../../layouts/tables/data/projectsTableData";
 import WetherforcastList from "../../layouts/tables/WetherforcastList";
+import MDButton from "../../components/MDButton";
+import { translateWord } from "../../locales/HandleLocale";
 //import WeatherforecastTableData_V2 from "../../layouts/tables/data/weatherforecastTableData_V2";
 
-function Tables() {
+function Stuff() {
   const { columns, rows } = authorsTableData();
   const { columns: pColumns, rows: pRows } = projectsTableData();
  //  const { columns: WColumns, rows: WRows } = WeatherforecastTableData_V2;
+ const user="menna"
   return (
     <DashboardLayout>
       <DashboardNavbar />
+   <Grid container>
+
+<Grid item xs={2}>
+<MDButton  variant="gradient" color="info" fullWidth>
+                new Stuff
+              </MDButton>
+
+</Grid>
+<Grid item xs={10}></Grid>
+   </Grid>
+    
       <MDBox pt={6} pb={3}>
         <Grid container spacing={6}>
           <Grid item xs={12}>
@@ -55,7 +69,7 @@ function Tables() {
                 coloredShadow="info"
               >
                 <MDTypography variant="h6" color="white">
-                  Authors Table
+                  {translateWord("Stuff")}
                 </MDTypography>
               </MDBox>
               <MDBox pt={3}>
@@ -69,6 +83,7 @@ function Tables() {
               </MDBox>
             </Card>
           </Grid>
+         {/*
           <Grid item xs={12}>
             <Card>
               <MDBox
@@ -97,6 +112,8 @@ function Tables() {
             </Card>
                   </Grid>
          <WetherforcastList/>
+
+*/}
         </Grid>
       </MDBox>
       <Footer />
@@ -104,4 +121,4 @@ function Tables() {
   );
 }
 
-export default Tables;
+export default Stuff;

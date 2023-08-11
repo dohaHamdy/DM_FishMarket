@@ -169,6 +169,7 @@ export default function App() {
         });
 
     const configsButton = (
+           
         <MDBox
             display="flex"
             justifyContent="center"
@@ -186,10 +187,13 @@ export default function App() {
             sx={{ cursor: "pointer" }}
             onClick={handleConfiguratorOpen}
         >
+         
             <Icon fontSize="small" color="inherit">
                 settings
             </Icon>
+
         </MDBox>
+         
     );
 
     return direction === "rtl" ? (
@@ -231,7 +235,7 @@ export default function App() {
                         onMouseLeave={handleOnMouseLeave}
                     />
                     <Configurator />
-                    {configsButton}
+                    {/*configsButton*/}
                 </>
             )}
             {layout === "vr" && <Configurator />}

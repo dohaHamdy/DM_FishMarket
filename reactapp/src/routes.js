@@ -4,7 +4,7 @@
 =========================================================
 
 * Product Page: https://www.creative-tim.com/product/material-dashboard-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
+* (https://www.creative-tim.com)
 
 Coded by www.creative-tim.com
 
@@ -37,7 +37,6 @@ Coded by www.creative-tim.com
 
 // Material Dashboard 2 React layouts
 import Dashboard from "../src/layouts/dashboard";
-import Tables from "../src/layouts/tables/index";
 import Billing from "../src/layouts/billing";
 import RTL from "../src/layouts/rtl";
 import Notifications from "../src/layouts/notifications";
@@ -47,30 +46,33 @@ import SignUp from "../src/layouts/authentication/sign-up";
 
 // @mui icons
 import Icon from "@mui/material/Icon";
+import CreateStuff from "./layouts/tables/create";
+import ViewStuff from "./layouts/tables/view";
+import Stuff from "./layouts/tables";
 
 const routes = [
   {
     type: "collapse",
     name: "Dashboard",
     key: "dashboard",
-    icon: <Icon fontSize="small">dashboard</Icon>,
+   // icon: <Icon fontSize="small">dashboard</Icon>,
     route: "/dashboard",
     component: <Dashboard />,
   },
   {
 
     type: "collapse",
-    name: "Tables",
-    key: "tables",
-    icon: <Icon fontSize="small">table_view</Icon>,
-    route: "/tables",
-    component: <Tables />,
+    name: "Stuff",
+    key: "Stuff",
+  //  icon: <Icon fontSize="small">stuff</Icon>,
+    route: "/Stuff",
+    component: <Stuff />,
   },
   {
     type: "collapse",
     name: "Billing",
     key: "billing",
-    icon: <Icon fontSize="small">receipt_long</Icon>,
+    //icon: <Icon fontSize="small">receipt_long</Icon>,
     route: "/billing",
     component: <Billing />,
   },
@@ -78,7 +80,7 @@ const routes = [
     type: "collapse",
     name: "RTL",
     key: "rtl",
-    icon: <Icon fontSize="small">format_textdirection_r_to_l</Icon>,
+    //icon: <Icon fontSize="small">format_textdirection_r_to_l</Icon>,
     route: "/rtl",
     component: <RTL />,
   },
@@ -86,7 +88,7 @@ const routes = [
     type: "collapse",
     name: "Notifications",
     key: "notifications",
-    icon: <Icon fontSize="small">notifications</Icon>,
+   // icon: <Icon fontSize="small">notifications</Icon>,
     route: "/notifications",
     component: <Notifications />,
   },
@@ -94,7 +96,7 @@ const routes = [
     type: "collapse",
     name: "Profile",
     key: "profile",
-    icon: <Icon fontSize="small">person</Icon>,
+   // icon: <Icon fontSize="small">person</Icon>,
     route: "/profile",
     component: <Profile />,
   },
@@ -102,7 +104,7 @@ const routes = [
     type: "collapse",
     name: "Sign In",
     key: "sign-in",
-    icon: <Icon fontSize="small">login</Icon>,
+   // icon: <Icon fontSize="small">login</Icon>,
     route: "/authentication/sign-in",
     component: <SignIn />,
   },
@@ -110,7 +112,7 @@ const routes = [
     type: "collapse",
     name: "Sign Up",
     key: "sign-up",
-    icon: <Icon fontSize="small">assignment</Icon>,
+   // icon: <Icon fontSize="small">assignment</Icon>,
     route: "/authentication/sign-up",
     component: <SignUp />,
   },
