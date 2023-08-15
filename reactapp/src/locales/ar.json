@@ -1,4 +1,11 @@
 {
     "Email":"الايميل",
-"Stuff":"الفريق"
+    "Stuff":"الفريق",
+    "busniss-units":"الشركات",
+    "busniss-unit":"شركة",
+    "name":"الاسم",
+    "owner-name":"اسم المالك",
+    "owner-phone":"موبايل المالك",
+    "owner-profit-percentage":"نسبة ربح المالك",
+    "insert":"إضافة"
 }

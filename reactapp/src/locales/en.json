@@ -1,5 +1,12 @@
 {
     "Email":"Email",
-    "Stuff":"Stuff"
+    "Stuff":"Stuff",
+    "busniss-units":"Busniss Units",
+    "busniss-unit":"Busniss Unit",
+    "name":"name",
+    "owner-name":"Owner Name",
+    "owner-phone":"Owner Phone",
+    "owner-profit-percentage":"Owner Profit Percentage",
+    "insert":"insert"
 
 }

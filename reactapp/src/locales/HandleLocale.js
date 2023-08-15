@@ -1,10 +1,11 @@
 
-const Cookies = require("js-cookie");
+//const Cookies = require("js-cookie");
 const app_ar = require('./ar.json');
 const app_en = require('./en.json');
 
+
 module.exports = {
-    setCookie: function (name, value, days) {
+   /* setCookie: function (name, value, days) {
         Cookies.set(name, value, {
           httpOnly: false,
           sameSite: "none",
@@ -16,10 +17,9 @@ module.exports = {
         let cookieValue = Cookies.get(name);
         return cookieValue;
       },
-
+*/
 
   translateWord: function (word) {
-    debugger;
     var translation;
     var cookieValue ='ar';// this.getCookie('languageCookie');
     if(cookieValue == 'ar'){
