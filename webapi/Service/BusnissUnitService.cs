@@ -45,6 +45,8 @@ namespace webapi.Service
 
         public BusnissUnit GetOne(int Id)
         {
+
+
             connection.Open();
 
             string sql = string.Format(HelperSqlCommands.getColumnsFromTableWhereId, BusnissUnitHelper.ColumnsName, BusnissUnitHelper.TableName,Id);
@@ -77,7 +79,7 @@ namespace webapi.Service
         {
             connection.Open();
 
-            string sql = string.Format(HelperSqlCommands.insertObjectsToTable, BusnissUnitHelper.TableName, BusnissUnitHelper.ColumnsNameWithOutId, busnissUnit.ValuesForInsert());
+            string sql = string.Format(HelperSqlCommands.insertObjectsToTable, BusnissUnitHelper.TableName, BusnissUnitHelper.ColumnsNameWithOutId,BusnissUnitHelper.ColumnsNameForOutput,"("+ busnissUnit.ValuesForInsert()+")");
             SqlCommand command = new SqlCommand(sql, connection);
             SqlDataReader reader = command.ExecuteReader();
           //  BusnissUnit busnissUnit = new BusnissUnit();
@@ -107,7 +109,7 @@ namespace webapi.Service
         {
             connection.Open();
 
-            string sql = string.Format(HelperSqlCommands.insertObjectsToTable, BusnissUnitHelper.TableName, BusnissUnitHelper.ColumnsNameWithOutId,"{ "+string.Join(',', busnissUnits.Select(b=> b.ValuesForInsert())) +" }");
+            string sql = string.Format(HelperSqlCommands.insertObjectsToTable, BusnissUnitHelper.TableName, BusnissUnitHelper.ColumnsNameWithOutId, BusnissUnitHelper.ColumnsNameForOutput,String.Join(',',busnissUnits.Select(a=>"("+a.ValuesForInsert()+")")) );
             SqlCommand command = new SqlCommand(sql, connection);
             SqlDataReader reader = command.ExecuteReader();
             List<BusnissUnit> busnissUnitREsponse = new List<BusnissUnit>();
@@ -135,7 +137,7 @@ namespace webapi.Service
         public BusnissUnit UpdateOne(BusnissUnit busnissUnit) {
             connection.Open();
 
-            string sql = string.Format(HelperSqlCommands.updateObjectInTableWhereId, BusnissUnitHelper.TableName, BusnissUnitHelper.ValuesForUpdate, busnissUnit.Id);
+            string sql = string.Format(HelperSqlCommands.updateObjectInTableWhereId, BusnissUnitHelper.TableName, busnissUnit.ValuesForUpdate(),BusnissUnitHelper.ColumnsNameForOutput, busnissUnit.Id);
             SqlCommand command = new SqlCommand(sql, connection);
             SqlDataReader reader = command.ExecuteReader();
             //  BusnissUnit busnissUnit = new BusnissUnit();
@@ -162,7 +164,14 @@ namespace webapi.Service
 
         }
 
-        public IEnumerable<BusnissUnit> UpdateMany(IEnumerable<BusnissUnit> busns) {  throw new NotImplementedException(); }
+        public IEnumerable<BusnissUnit> UpdateMany(IEnumerable<BusnissUnit> busns) {
+            List<BusnissUnit> units = new List<BusnissUnit>();
+            foreach (BusnissUnit item in busns)
+            {
+                units.Add(UpdateOne(item));
+            }
+            return units;
+        }
 
         public bool Delete(int Id) {
             connection.Open();

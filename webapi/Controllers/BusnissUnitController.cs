@@ -19,8 +19,8 @@ public class BusnissUnitController : ControllerBase
         _busnissUnitService = busnissUnitService;
     }
 
-    [HttpGet(Name = "GetBusnissUnit")]
-    public IEnumerable<BusnissUnit> Get()
+    [HttpGet(Name = "GetAllBusnissUnit")]
+    public IEnumerable<BusnissUnit> GetAll()
     {
       return  _busnissUnitService.GetAll();
     }
@@ -33,28 +33,28 @@ public class BusnissUnitController : ControllerBase
     
     
     
-    [HttpPost(Name =" PostBusnissUnit")]
-    public BusnissUnit Post(BusnissUnit unit)
+    [HttpPost(Name ="InsertOneBusnissUnit")]
+    public BusnissUnit InsertOne(BusnissUnit unit)
     {
         return _busnissUnitService.InsertOne(unit);
     }
 
-    [HttpPost(Name = "PostManyBusnissUnit")]
-    public IEnumerable<BusnissUnit> PostMany(IEnumerable<BusnissUnit> units)
+    [HttpPost(Name = "InsertManyBusnissUnit")]
+    public IEnumerable<BusnissUnit> InsertMany(IEnumerable<BusnissUnit> units)
     {
         return _busnissUnitService.InsertMany(units);
     }
 
 
 
-    [HttpPut(Name = "PutBusnissUnit")]
-    public BusnissUnit Put(BusnissUnit unit)
+    [HttpPut(Name = "UpdateOneBusnissUnit")]
+    public BusnissUnit UpdateOne(BusnissUnit unit)
     {
         return _busnissUnitService.UpdateOne(unit);
     }
 
-    [HttpPut(Name = "PutManyBusnissUnit")]
-    public IEnumerable<BusnissUnit> PutMany(IEnumerable<BusnissUnit> units)
+    [HttpPut(Name = "UpdateManyBusnissUnit")]
+    public IEnumerable<BusnissUnit> UpdateMany(IEnumerable<BusnissUnit> units)
     {
         return _busnissUnitService.UpdateMany(units);
     }
