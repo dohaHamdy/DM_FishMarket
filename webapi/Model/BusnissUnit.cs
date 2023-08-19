@@ -33,14 +33,22 @@ namespace webapi.Model
                     return "null";
                 switch (a.PropertyType.Name)
                 {
+                    case nameof(Byte)+"[]":
+                        if (((Byte[])a.GetValue(unit)).Length==0 )
+                            return "null";
+                        else 
+                            return a.GetValue(unit).ToString();
                     case nameof(Int32):
                     case nameof(Decimal):
                     case nameof(Double):
                         return a.GetValue(unit).ToString();
                     case nameof(String):
-                    //  case nameof(Byte[]):
+                        if (a.GetValue(unit) == "")
+                            return "null";
+                        else
+                            return "N'" + a.GetValue(unit).ToString() + "'";
                     default:
-                        return "'"+a.GetValue(unit).ToString()+"'";
+                        return "N'"+a.GetValue(unit).ToString()+"'";
 
                 }
             });
