@@ -49,8 +49,13 @@ import Icon from "@mui/material/Icon";
 import CreateStuff from "./layouts/tables/create";
 import ViewStuff from "./layouts/tables/view";
 import Stuff from "./layouts/tables";
+import BusnissUnitList from "../src/MasterData/BusnissUnit/List";
+import BusnissUnitSave from "../src/MasterData/BusnissUnit/Save";
 
-const routes = [
+const routes ={
+sideBarRoutes:
+
+ [
   {
     type: "collapse",
     name: "Dashboard",
@@ -67,6 +72,16 @@ const routes = [
   //  icon: <Icon fontSize="small">stuff</Icon>,
     route: "/Stuff",
     component: <Stuff />,
+  },
+  
+  {
+
+    type: "collapse",
+    name: "BusnissUnit",
+    key: "BusnissUnit",
+  //  icon: <Icon fontSize="small">stuff</Icon>,
+    route: "/BusnissUnit",
+    component: <BusnissUnitList />,
   },
   {
     type: "collapse",
@@ -116,6 +131,25 @@ const routes = [
     route: "/authentication/sign-up",
     component: <SignUp />,
   },
-];
+],
+websiteRoutes:[
+  {
+
+    name: "BusnissUnit",
+    key: "BusnissUnit",
+  //  icon: <Icon fontSize="small">stuff</Icon>,
+    route: "/BusnissUnit/new",
+    component: <BusnissUnitSave />,
+  }  ,
+  {
+
+    name: "BusnissUnit",
+    key: "BusnissUnit",
+  //  icon: <Icon fontSize="small">stuff</Icon>,
+    route: "/BusnissUnit/edit/:id",
+    component: <BusnissUnitSave />,
+  }  ,
+]
+}
 
 export default routes;

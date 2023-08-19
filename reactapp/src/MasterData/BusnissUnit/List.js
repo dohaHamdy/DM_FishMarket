@@ -28,26 +28,102 @@ import Footer from "../../examples/Footer";
 import DataTable from "../../examples/Tables/DataTable";
 
 // Data
-import authorsTableData from "../../layouts/tables/data/authorsTableData";
-import projectsTableData from "../../layouts/tables/data/projectsTableData";
-import WetherforcastList from "../../layouts/tables/WetherforcastList";
 import MDButton from "../../components/MDButton";
 import { translateWord  } from "../../locales/HandleLocale";
+import { useEffect, useState } from "react";
+import BusnissUnitApi from "../../CallingApis/BusnissUnitApi";
 //import WeatherforecastTableData_V2 from "../../layouts/tables/data/weatherforecastTableData_V2";
 
-function Stuff() {
-  const { columns, rows } = authorsTableData();
-  const { columns: pColumns, rows: pRows } = projectsTableData();
- //  const { columns: WColumns, rows: WRows } = WeatherforecastTableData_V2;
- const user="menna"
+
+
+
+function BusnissUnitList() {
+
+  
+  const [RowsData,setRowsData]=useState([])
+
+  const Author = ({  name, email }) => (
+    <MDBox display="flex" alignItems="center" lineHeight={1}>
+    {/**  <MDAvatar src={image} name={name} size="sm" /> */}
+      <MDBox ml={2} lineHeight={1}>
+        <MDTypography display="block" variant="button" fontWeight="medium">
+          {name}
+        </MDTypography>
+        <MDTypography variant="caption">{email}</MDTypography>
+      </MDBox>
+    </MDBox>
+  );
+
+  const Job = ({ title, description }) => (
+    <MDBox lineHeight={1} textAlign="left">
+      <MDTypography display="block" variant="caption" color="text" fontWeight="medium">
+        {title}
+      </MDTypography>
+      <MDTypography variant="caption">{description}</MDTypography>
+    </MDBox>
+  );
+/**
+ *  "id": 4,
+    "name": "apitest1",
+    "ownerName": "apitest1",
+    "ownerPhone": "56468454",
+    "ownerEmail": "apitest1",
+    "ownerSignature": null,
+    "ownerProfitPercentage": 50
+ */
+    useEffect(()=>{
+     
+      BusnissUnitApi.GetAll()
+      .then((response)=>{
+        console.log('BusnissUnitApi',response)
+        setRowsData(response)
+      })
+  
+    },[])
+   
+    
+    
+  const columns=  [
+    { Header:  translateWord("name"), accessor: "name", width: "45%", align: "left" },
+    { Header: translateWord("owner-name"), accessor: "ownerName", align: "left" },
+    { Header: translateWord("owner-phone"), accessor: "ownerPhone", align: "center" },
+   // { Header: "Owner Signature", accessor: "ownerSignature", align: "center" },
+    { Header: translateWord("owner-profit-percentage"), accessor: "ownerProfitPercentage", align: "center" },
+    {  accessor: "action", align: "center" },
+  ];
+
+var rows=RowsData.map((row)=> {
+  return {
+    name:  <Job title={row.name} description="Organization" />,
+    ownerName:<Author  name={row.ownerName} email={row.ownerEmail} />,
+    ownerPhone: (
+    <MDBox ml={-1}>
+     {row.ownerPhone}
+     {/** <MDBadge badgeContent="online" color="success" variant="gradient" size="sm" /> */}
+    </MDBox>
+  ),
+  ownerProfitPercentage: (
+    <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
+    {row.ownerProfitPercentage}%
+    </MDTypography>
+  ),
+  action: (
+    <MDTypography component="a" href={"/BusnissUnit/edit/"+row.id}  variant="caption" color="text" fontWeight="medium">
+      Edit
+    </MDTypography>
+  )
+  }
+})
+
+
   return (
     <DashboardLayout>
       <DashboardNavbar />
    <Grid container>
 
 <Grid item xs={2}>
-<MDButton  variant="gradient" color="info" fullWidth>
-                new Stuff
+<MDButton  component="a" href="/BusnissUnit/new" size="large"  variant="gradient" color="info" fullWidth  >
+{translateWord("insert")}
               </MDButton>
 
 </Grid>
@@ -67,9 +143,10 @@ function Stuff() {
                 bgColor="info"
                 borderRadius="lg"
                 coloredShadow="info"
+                textAlign="center"
               >
-                <MDTypography variant="h6" color="white">
-                  {translateWord("Stuff")}
+                <MDTypography variant="h4" color="white">
+                  {translateWord("busniss-units")}
                 </MDTypography>
               </MDBox>
               <MDBox pt={3}>
@@ -121,4 +198,4 @@ function Stuff() {
   );
 }
 
-export default Stuff;
+export default BusnissUnitList;

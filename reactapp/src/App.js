@@ -30,8 +30,8 @@ import rtlPlugin from "stylis-plugin-rtl";
 import { CacheProvider } from "@emotion/react";
 import createCache from "@emotion/cache";
 
-// Material Dashboard 2 React routes
-import routes from "../src/routes";// "routes";
+// Material Dashboard 2 React 
+import routes from "../src/routes";
 
 // Material Dashboard 2 React contexts
 import { useMaterialUIController, setMiniSidenav, setOpenConfigurator } from "../src/context";// "context";
@@ -162,12 +162,12 @@ export default function App() {
             }
 
             if (route.route) {
-                return <Route exact path={route.route} element={route.component} key={route.key} />;
+                return <Route   exact  path={route.route} element={route.component} key={route.key} />;
             }
 
             return null;
         });
-
+    
     const configsButton = (
            
         <MDBox
@@ -206,17 +206,18 @@ export default function App() {
                             color={sidenavColor}
                             brand={(transparentSidenav && !darkMode) || whiteSidenav ? brandDark : brandWhite}
                             brandName="Huwat Company"
-                            routes={routes}
+                            routes={routes.sideBarRoutes}
                             onMouseEnter={handleOnMouseEnter}
                             onMouseLeave={handleOnMouseLeave}
                         />
                         <Configurator />
-                        {configsButton}
+                        {/*configsButton*/}
                     </>
                 )}
                 {layout === "vr" && <Configurator />}
                 <Routes>
-                    {getRoutes(routes)}
+                    {getRoutes(routes.sideBarRoutes)}
+                    {getRoutes(routes.websiteRoutes)}
                     <Route path="*" element={<Navigate to="/dashboard" />} />
                 </Routes>
             </ThemeProvider>
@@ -230,7 +231,7 @@ export default function App() {
                         color={sidenavColor}
                         brand={(transparentSidenav && !darkMode) || whiteSidenav ? brandDark : brandWhite}
                         brandName="Huwat Company"
-                        routes={routes}
+                        routes={routes.sideBarRoutes}
                         onMouseEnter={handleOnMouseEnter}
                         onMouseLeave={handleOnMouseLeave}
                     />
@@ -240,7 +241,8 @@ export default function App() {
             )}
             {layout === "vr" && <Configurator />}
             <Routes>
-                {getRoutes(routes)}
+                {getRoutes(routes.sideBarRoutes)}
+               {getRoutes(routes.websiteRoutes)}
                 <Route path="*" element={<Navigate to="/dashboard" />} />
             </Routes>
         </ThemeProvider>
