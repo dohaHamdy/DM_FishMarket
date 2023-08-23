@@ -173,7 +173,7 @@ namespace webapi.Service
             return units;
         }
 
-        public bool Delete(int Id) {
+        public bool DeleteOne(int Id) {
             connection.Open();
 
             string sql = string.Format(HelperSqlCommands.DeleteFromTableWhereId,BusnissUnitHelper.TableName, Id);

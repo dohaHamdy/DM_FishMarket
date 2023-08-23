@@ -1,4 +1,4 @@
-import * as React from 'react';
+import  React,{useEffect, useState } from 'react';
 import Container from '@mui/material/Container';
 import Paper from '@mui/material/Paper';
 //import AddressForm from './AddressForm';
@@ -11,15 +11,17 @@ import MDButton from '../../components/MDButton';
 import MDTypography from '../../components/MDTypography';
 import { translateWord } from '../../locales/HandleLocale';
 import BusnissUnitApi from '../../CallingApis/BusnissUnitApi';
-import {  useNavigate } from 'react-router';
+import {  useNavigate, useParams } from 'react-router';
 
 
 
 
 function  BusnissUnitSave(prop) {
+  let { id } = useParams();
+  
   const navigation = useNavigate()
-  console.log("BusnissUnitCreate props:",prop )
-  const [state, setState] = React.useState({
+  const [isEdit, setIsEdit]=useState(false)
+  const [state, setState] = useState({
    
     name: "",
     ownerName: "",
@@ -28,16 +30,44 @@ function  BusnissUnitSave(prop) {
     ownerSignature: "",
     ownerProfitPercentage: 50
   })
+useEffect(()=>{
+if(id)//in edit mode
+{
+setIsEdit(true);
+BusnissUnitApi.GetOne(id).then((response )=>{
+  setState({
+    name: response.name,
+    ownerName: response.ownerName,
+    ownerPhone: response.ownerPhone,
+    ownerEmail: response.ownerEmail,
+    ownerSignature:response.ownerSignature,
+    ownerProfitPercentage: response.ownerProfitPercentage
+  })
+})
+} 
 
+
+},[]) 
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    BusnissUnitApi.InsertOne(state).then((response)=>
+    if(isEdit)
     {
-      console.log("response of the insert: ",response)
+      state.id=id
+      BusnissUnitApi.UpdateOne({...state,id}).then((response)=>
+      {
+        navigation("/BusnissUnit")
+      })
+    }
+else 
+{
+  BusnissUnitApi.InsertOne(state).then((response)=>
+    {
       navigation("/BusnissUnit")
     })
+}
+    
   }
 
   const handleChange=(evt)=> {

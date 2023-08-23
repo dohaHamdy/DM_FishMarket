@@ -8,5 +8,10 @@
     "owner-phone":"موبايل المالك",
     "owner-profit-percentage":"نسبة ربح المالك",
     "insert":"إضافة",
-    "inserting-new-busnissunit":"إضافة شركة"
+    "inserting-new-busnissunit":"إضافة شركة",
+    "Confirm-the-delete":"تأكيد المسح",
+    "Are-you-sure-you-want-to-delete":"هل انت متاكد انك تريد مسح",
+    "this-busniss-unit":"هذه الشركة",
+    "delete":"حذف",
+    "cancel":"الغاء"
 }

@@ -60,10 +60,10 @@ public class BusnissUnitController : ControllerBase
     }
 
 
-    [HttpDelete(Name = "DeleteBusnissUnit")]
-    public bool Delete(int Id)
+    [HttpDelete(Name = "DeleteOneBusnissUnit")]
+    public bool DeleteOne(int Id)
     {
-        return _busnissUnitService.Delete(Id);
+        return _busnissUnitService.DeleteOne(Id);
     }
     [HttpDelete(Name = "DeleteManyBusnissUnit")]
     public bool DeleteMany(IEnumerable<int> Ids)

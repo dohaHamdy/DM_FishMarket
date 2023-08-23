@@ -8,17 +8,23 @@ const  BusnissUnitApi = {
  var response = await fetch(baseURL+ModelName+'/GetAll')
 
  var Rowsdata = await response.json();
- console.log("Rowsdata : ",Rowsdata)
  return Rowsdata;
 
 
 
 },
 
+GetOne : async function(id){
+
+    var response = await fetch(baseURL+ModelName+'/GetOne?id='+id)
+   
+    var Rowsdata = await response.json();
+    return Rowsdata;
+   
+   },
 InsertOne : async function( params)
 {
     
-    console.log("params: ",params);
  var response = await fetch(baseURL+ModelName+'/InsertOne',{
     method:"POST",
    headers:{   
@@ -32,7 +38,35 @@ InsertOne : async function( params)
 
 
 
-}
+},
+UpdateOne :async function( params)
+{
+    
+ var response = await fetch(baseURL+ModelName+'/UpdateOne',{
+    method:"PUT",
+   headers:{   
+    "Content-Type": "application/json"
+    },
+    body:JSON.stringify(params)
+ })
+
+ var Rowsdata = await response.json();
+ return Rowsdata;
+
+
+
+},
+DeleteOne : async function(id){
+
+    var response = await fetch(baseURL+ModelName+'/DeleteOne?id='+id,
+    {
+      method:"DELETE",
+    })
+   
+    var Rowsdata = await response.json();
+    return Rowsdata;
+   
+   },
 }
 
 

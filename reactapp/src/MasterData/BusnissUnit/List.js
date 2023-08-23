@@ -32,6 +32,8 @@ import MDButton from "../../components/MDButton";
 import { translateWord  } from "../../locales/HandleLocale";
 import { useEffect, useState } from "react";
 import BusnissUnitApi from "../../CallingApis/BusnissUnitApi";
+import { Modal } from "@mui/material";
+import BusnissUnitDelete from "./Delete";
 //import WeatherforecastTableData_V2 from "../../layouts/tables/data/weatherforecastTableData_V2";
 
 
@@ -41,27 +43,9 @@ function BusnissUnitList() {
 
   
   const [RowsData,setRowsData]=useState([])
+const [openDeleteModal,setopenDeleteModal]=useState(false)
+const[DeletedId,setDeletedId]=useState(null)
 
-  const Author = ({  name, email }) => (
-    <MDBox display="flex" alignItems="center" lineHeight={1}>
-    {/**  <MDAvatar src={image} name={name} size="sm" /> */}
-      <MDBox ml={2} lineHeight={1}>
-        <MDTypography display="block" variant="button" fontWeight="medium">
-          {name}
-        </MDTypography>
-        <MDTypography variant="caption">{email}</MDTypography>
-      </MDBox>
-    </MDBox>
-  );
-
-  const Job = ({ title, description }) => (
-    <MDBox lineHeight={1} textAlign="left">
-      <MDTypography display="block" variant="caption" color="text" fontWeight="medium">
-        {title}
-      </MDTypography>
-      <MDTypography variant="caption">{description}</MDTypography>
-    </MDBox>
-  );
 /**
  *  "id": 4,
     "name": "apitest1",
@@ -73,11 +57,7 @@ function BusnissUnitList() {
  */
     useEffect(()=>{
      
-      BusnissUnitApi.GetAll()
-      .then((response)=>{
-        console.log('BusnissUnitApi',response)
-        setRowsData(response)
-      })
+      reloadData()
   
     },[])
    
@@ -94,8 +74,23 @@ function BusnissUnitList() {
 
 var rows=RowsData.map((row)=> {
   return {
-    name:  <Job title={row.name} description="Organization" />,
-    ownerName:<Author  name={row.ownerName} email={row.ownerEmail} />,
+    name: 
+    <MDBox lineHeight={1} textAlign="left">
+    <MDTypography display="block" variant="caption" color="text" fontWeight="medium">
+    {row.name} 
+    </MDTypography>
+    <MDTypography variant="caption"> {row.name} </MDTypography>
+  </MDBox> ,
+    ownerName:
+    <MDBox display="flex" alignItems="center" lineHeight={1}>
+    {/**  <MDAvatar src={image} name={name} size="sm" /> */}
+      <MDBox ml={2} lineHeight={1}>
+        <MDTypography display="block" variant="button" fontWeight="medium">
+        {row.ownerName}
+        </MDTypography>
+        <MDTypography variant="caption">{row.ownerEmail}</MDTypography>
+      </MDBox>
+    </MDBox>,
     ownerPhone: (
     <MDBox ml={-1}>
      {row.ownerPhone}
@@ -108,17 +103,36 @@ var rows=RowsData.map((row)=> {
     </MDTypography>
   ),
   action: (
-    <MDTypography component="a" href={"/BusnissUnit/edit/"+row.id}  variant="caption" color="text" fontWeight="medium">
+   <>
+   <MDTypography component="a" href={"/BusnissUnit/edit/"+row.id}  variant="caption" color="text" fontWeight="medium">
       Edit
     </MDTypography>
+    {" / "}
+    <MDTypography component="a"  href="#" onClick= {(a)=>{ HandleDelete(row.id) }}  variant="caption" color="text" fontWeight="medium">
+      Delete
+    </MDTypography>
+   </>
+   
   )
   }
 })
+function reloadData(){
+  BusnissUnitApi.GetAll()
+  .then((response)=>{
+    setRowsData(response)
+  })
+}
+
+function HandleDelete(id) {
+  setopenDeleteModal(true)
+setDeletedId(id);
+}
 
 
   return (
     <DashboardLayout>
       <DashboardNavbar />
+      <BusnissUnitDelete  reloadData={reloadData} setOpenModel={setopenDeleteModal} openModal={openDeleteModal} recordId={DeletedId} />
    <Grid container>
 
 <Grid item xs={2}>

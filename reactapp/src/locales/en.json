@@ -8,6 +8,11 @@
     "owner-phone":"Owner Phone",
     "owner-profit-percentage":"Owner Profit Percentage",
     "insert":"insert",
-    "inserting-new-busnissunit":"inserting new Busniss Unit"
+    "inserting-new-busnissunit":"inserting new Busniss Unit",
+    "Confirm-the-delete":"Confirm the delete",
+    "Are-you-sure-you-want-to-delete":"Are you sure you want to delete",
+    "this-busniss-unit":"this busniss unit",
+    "delete":"delete",
+    "cancel":"cancel"
 
 }
